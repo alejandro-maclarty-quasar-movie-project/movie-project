@@ -24,26 +24,22 @@ function getMovies() {
     return fetch(glitchURL)
         .then((response) => response.json())
 }
-
 // END GET MOVIES
 // END LOADING...
-// getMovies().then((movies) => console.log(movies))
-var allMovies = getMovies().then((movies) => document.querySelector(".content").innerHTML = `${JSON.stringify(movies)}`)
 
+// getMovies().then((movies) => console.log(movies))
+var allMovies = getMovies().then((movies) => document.querySelector(".content").innerHTML = `${JSON.stringify(rendered)}`)
+
+let rendered = function renderMovies(movies) {
+    console.log(movies)
+    var html = '';
+    for (var i = 0; i < movies.length; i++) {
+        html += renderCoffee(movies[i]);
+    }
+    return html;
+}
 
 // BEGIN ADD MOVIE
-// function addMovie(newMovie) {
-//     let options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(movie)
-//     }
-//     return fetch(glitchURL, options)
-//         .then((response) => response.json())
-// }
-
 function addMovie(newMovie) {
     let options = {
         method: 'POST',
@@ -57,20 +53,47 @@ function addMovie(newMovie) {
 }
 
 
-var addMovieButton = document.getElementById("newMovieName")
-    addMovieButton.addEventListener("click",function () {
-        var addMovieSub = document.getElementById("newMovieName")
-        var addMovieRateSub = document.getElementById("newMovieRating")
-        let newMovie = {name: newMovieName, rating: newMovieRating};
-        console.log(newMovie)
-addMovie(newMovie)
-    })
+// let addMovieButton = document.getElementById("#submitNewMovie")
+document.querySelector("#submitNewMovie").addEventListener("click", function (e) {
+    e.preventDefault()
+    console.log("hello")
+    let addMovieSub = document.querySelector("#newMovieName").value
+    let addMovieRateSub = document.querySelector("#newMovieRating").value
+    let newMovie = {name: addMovieSub, rating: addMovieRateSub};
+    console.log(newMovie)
+    addMovie(newMovie)
+})
 // Coffee Example
 // e.preventDefault();
 // var selection = roastSelection2.value;
 // var newCoffee = document.getElementById('Add-coffee').value;
 // newCoffee = newCoffee.charAt(0).toUpperCase() + newCoffee.slice(1).toLowerCase();
 
+// BEGIN EDIT MOVIE
+function editMovie(movie) {
+    let options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie)
+    }
+    return fetch(`${glitchURL}/${movie.id}`, options)
+        .then((response) => response.json())
+}
+// alteredMovie =
+//     {
+//       "title": "resident evil",
+//       "rating": "5",
+//       "poster": "https://m.media-amazon.com/images/M/MV5BZmI1ZGRhNDYtOGVjZC00MmUyLThlNTktMTQyZGE3MzE1ZTdlXkEyXkFqcGdeQXVyNDE5MTU2MDE@._V1_SX300.jpg",
+//       "year": "2002",
+//       "genre": "Action, Horror, Sci-Fi",
+//       "director": "Paul W.S. Anderson",
+//       "plot": "A special military unit fights a powerful, out-of-control supercomputer and hundreds of scientists who have mutated into flesh-eating creatures after a laboratory accident.",
+//       "actors": "Ryan McCluskey, Oscar Pearce, Indra Ové, Anna Bolt",
+//       // "id": 3
+// }
+// END EDIT MOVIE
 
 
 // newMovie =
@@ -82,61 +105,21 @@ addMovie(newMovie)
 // movieRating,
 // // rating: 8
 // }
-;
+
 // END ADD MOVIE
 // addMovie(newMovie).then((newMovie)=>console.log(newMovie));
 
 
 // BEGIN REMOVE MOVIE BY ID
-function removeMovieById(id) {
-    let options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }
-    fetch(`${glitchURL}/${id}`, options)
-}
+// function removeMovieById(id) {
+//     let options = {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     }
+//     fetch(`${glitchURL}/${id}`, options)
+// }
 
 // END REMOVE MOVIE BY ID
 
-function editMovie(movie) {
-    let options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movie) //Convert the JS object into a JSON string before sending it up to the server.
-    }
-    return fetch(`${glitchURL}/${movie.id}`, options)
-        .then((response) => response.json())
-}
-
-alteredMovie =
-    {
-        title: "Down",
-        rating
-:
-"5",
-    poster
-:
-"You got it" ,
-    year
-:
-"2001",
-    genre
-:
-"drama,history,war",
-    director
-:
-"Ridely Scott",
-    plot
-:
-"lorem" ,
-    actors
-:
-"Daniel Craig",
-    id
-:
-2
-}
