@@ -50,14 +50,27 @@ function addMovie(newMovie) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(movie)
+        body: JSON.stringify(newMovie)
     }
     return fetch(glitchURL, options)
         .then((response) => response.json())
 }
-let newMovie = {name: newMovieName, rating: newMovieRating};
 
-console.log(newMovie)
+
+var addMovieButton = document.getElementById("newMovieName")
+    addMovieButton.addEventListener("click",function () {
+        var addMovieSub = document.getElementById("newMovieName")
+        var addMovieRateSub = document.getElementById("newMovieRating")
+        let newMovie = {name: newMovieName, rating: newMovieRating};
+        console.log(newMovie)
+addMovie(newMovie)
+    })
+// Coffee Example
+// e.preventDefault();
+// var selection = roastSelection2.value;
+// var newCoffee = document.getElementById('Add-coffee').value;
+// newCoffee = newCoffee.charAt(0).toUpperCase() + newCoffee.slice(1).toLowerCase();
+
 
 
 // newMovie =
