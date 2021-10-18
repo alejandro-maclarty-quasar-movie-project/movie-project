@@ -10,7 +10,7 @@ const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 let newMovie;
 let movieTitle = "";
 let movieRating = ""; // #/10
-
+let alteredMovie;
 
 // BEGIN LOADING... (WITH FETCH)
 // BEGIN GET MOVIES
@@ -58,3 +58,27 @@ function removeMovieById(id) {
     fetch(`${glitchURL}/${id}`, options)
 }
 // END REMOVE MOVIE BY ID
+
+function editMovie(movie) {
+    let options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movie) //Convert the JS object into a JSON string before sending it up to the server.
+    }
+    return fetch(`${glitchURL}/${movie.id}`, options)
+        .then((response)=>response.json())
+}
+alteredMovie =
+    {
+        title: "Down",
+        rating: "5",
+        poster: "You got it" ,
+        year: "2001",
+        genre: "drama,history,war",
+        director: "Ridely Scott",
+        plot: "lorem" ,
+        actors: "Daniel Craig",
+        id: 2
+    }
