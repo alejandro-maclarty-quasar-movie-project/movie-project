@@ -25,7 +25,6 @@ var allMovies = getMovies().then((movies) => document.querySelector(".content").
 
 
 // BEGIN ADD MOVIE
-
 function addMovie(movie) {
     let options = {
         method: 'POST',
@@ -38,12 +37,12 @@ function addMovie(movie) {
         .then((response) => response.json())
 }
 
-newMovie = {
-    // title: movieTitle,
-    title: "Back to the Future",
+// newMovie = {
+//     title: movieTitle,
+    // title: "Back to the Future",
     // rating: movieRating,
-    rating: 8
-};
+    // rating: 8
+// };
 // END ADD MOVIE
 // addMovie(newMovie).then((newMovie)=>console.log(newMovie));
 
