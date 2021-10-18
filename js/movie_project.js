@@ -12,23 +12,42 @@ let movieTitle = "";
 let movieRating = ""; // #/10
 let alteredMovie;
 
-const loadingImage = (`<img src="../img/loading-1.gif">`)
+const loadingImage = (`<!--<img src="../img/loading-1.gif">-->`);
 
 
-document.querySelector(".content").innerHTML = (`${loadingImage}`)
+// document.querySelector("#content").innerHTML = (`${loadingImage}`);
 
 
 // BEGIN LOADING... (WITH FETCH)
 // BEGIN GET MOVIES
+// var ready = (callback) => {
+//     if (document.readyState != "loading") callback();
+//     else document.addEventListener("DOMContentLoaded", callback);
+// }
 function getMovies() {
     return fetch(glitchURL)
         .then((response) => response.json())
+    //     .then((ready = (callback) => {
+    //     if (document.readyState != "loading") callback();
+    //     else document.addEventListener("DOMContentLoaded", callback);
+    // }))
+        // .then((ready(() => {
+    // })
+        .then((movies)=>{
+            console.log(movies);
+            for (let i = 0; i < movies.length; i++){
+                document.querySelector("#content").append(`<p>${movies[0].id}</p>`)
+                // console.log(movies)
+            }
+        });
 }
+
+
 // END GET MOVIES
 // END LOADING...
 
 // getMovies().then((movies) => console.log(movies))
-var allMovies = getMovies().then((movies) => document.querySelector(".content").innerHTML = `${JSON.stringify(rendered)}`)
+var allMovies = getMovies().then((movies) => document.querySelector("#content").innerHTML = `${JSON.stringify(rendered)}`)
 
 let rendered = function renderMovies(movies) {
     console.log(movies)
