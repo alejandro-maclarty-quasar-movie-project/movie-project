@@ -1,0 +1,5 @@
+https://www.omdbapi.com/
+
+https://rapidapi.com/Matt11/api/title-case-converter
+
+https://codepen.io/drehimself/pen/azBmdK

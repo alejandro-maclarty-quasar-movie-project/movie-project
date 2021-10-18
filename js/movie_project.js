@@ -17,44 +17,45 @@ let movieRating = ""; // #/10
 function getMovies() {
     return fetch(glitchURL)
         .then((response) => response.json())
-
 }
 // END GET MOVIES
 // END LOADING...
-getMovies().then((movies) => console.log(movies))
+// getMovies().then((movies) => console.log(movies))
+var allMovies = getMovies().then((movies) => document.querySelector(".content").innerHTML = `${JSON.stringify(movies)}`)
 
 
 // BEGIN ADD MOVIE
-function addMovie(dog) {
+
+function addMovie(movie) {
     let options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dog)
+        body: JSON.stringify(movie)
     }
     return fetch(glitchURL, options)
         .then((response) => response.json())
 }
 
 newMovie = {
-    title: movieTitle,
-    // title: "Foundation",
-    rating: movieRating,
-    // rating: 8
+    // title: movieTitle,
+    title: "Back to the Future",
+    // rating: movieRating,
+    rating: 8
 };
 // END ADD MOVIE
 // addMovie(newMovie).then((newMovie)=>console.log(newMovie));
 
 
-
-//Delete dog by ID
-// function deleteDog(id) {
-//     let options = {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     }
-//     fetch(`${API_URL}/${id}`, options)
-// }tps://spectacled-slender-reaper.glitch.me/movies"
+// BEGIN REMOVE MOVIE BY ID
+function removeMovieById(id) {
+    let options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+    fetch(`${glitchURL}/${id}`, options)
+}
+// END REMOVE MOVIE BY ID
