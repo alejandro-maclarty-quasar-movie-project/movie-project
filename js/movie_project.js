@@ -36,37 +36,40 @@ function getMovies() {
     console.log("in getMovies under remove")
     return fetch(glitchURL)
         .then((response) => response.json())
-        .then()
-
-        .then((movie) => {
-            movie.forEach((movie) => {
+        .then((movies) => {
+            var movieList = document.querySelector(".content")
+            movies.forEach((movie) => {
                 // console.log(movie)
-                var movieList = document.querySelector(".content")
-                movieList.innerHTML = movieList.innerHTML + `
+                var html = `
                     <div class="movieTitle">Title: ${movie.title}</div>
                     <div class="movieRating">Rating: ${movie.rating}/10</div>
                     <div class="movieYear">Year: ${movie.year}</div>
                     <div class="moviePlot">Plot: ${movie.plot}</div>
                     <div class="movieGenre">Genre: ${movie.genre}</div>
-                    <button type="submit" class="button" id="removeMovie">Remove Movie ID: ${movie.id}</button>
+                    <button type="submit" class="button removeMovie ${movie.id}" data-id=${movie.id}>Remove Movie ID: ${movie.id}</button>
                     <hr>`
+                movieList.innerHTML += html;
             })
-            // console.log(movie)
         });
 }
+document.addEventListener("click", function (e) {
+    console.log(e.target.getAttribute("data-id"))
+    removeMovieById(e.target.getAttribute("data-id"))
 
-// BEGIN REMOVE MOVIE BY ID
-document.querySelector("#removeMovie").addEventListener("click", function () {
 })
+// BEGIN REMOVE MOVIE BY ID
+// document.querySelector(".content").removeMovie.addEventListener("click", function () {
+// document.querySelector(".content").document.querySelector(".removeMovie").addEventListener("click", function (){
+// })
 
 function removeMovieById(id) {
     let options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        method: 'DELETE'
     }
-    fetch(`${glitchURL}/${id}`, options)
+    fetch(`${glitchURL}/${id}`, options).then (movie => {
+        console.log(movie)
+        getMovies()
+    })
 }
 // END REMOVE MOVIE BY ID
 
