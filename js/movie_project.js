@@ -24,6 +24,8 @@ function getMovies() {
                 <div class="movieRating">Rating: ${movie[i].rating}/10</div>
                 `)
 
+
+
             }
             console.log(movie)
         });
