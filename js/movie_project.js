@@ -7,7 +7,7 @@ console.log("---------");
 const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 
 function loading() {
-    document.querySelector("body").innerHTML = (`<div class="loader">`);
+    document.querySelector("body").append(`<div class="loader">`);
 }
 
 
@@ -15,7 +15,9 @@ function loading() {
 // BEGIN GET MOVIES
 function getMovies() {
     return fetch(glitchURL)
+        // .then(document.querySelector("body").innerHTML = (`<div class="loader">`))
         .then((response) => response.json())
+        // .then(document.querySelector("body").innerHTML = (""))
         .then((movie) => {
             for (let i = 0; i < movie.length; i++) {
                 document.querySelector(".content").append
