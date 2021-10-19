@@ -6,7 +6,7 @@ console.log("---------");
 // api
 const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 
-
+// let html = "";
 
 // Without jQuery
 // Define a convenience method and use it
@@ -30,6 +30,7 @@ function loading() {
 // BEGIN LOADING... (WITH FETCH)
 // BEGIN GET MOVIES
 function getMovies() {
+    let html = "";
     // var body = document.querySelector(".loader");
     // body.classList.remove("loader");
     console.log("in getMovies under remove")
@@ -38,15 +39,28 @@ function getMovies() {
         .then()
 
         .then((movie) => {
-            for (let i = 0; i < movie.length; i++) {
-                document.querySelector(".content").innerHTML =
-                    (`
-                <div class="movieTitle">Title: ${movie[i].title}</div>
-                <div class="movieRating">Rating: ${movie[i].rating}/10</div>
-                `)
-            }
-            // console.log(movie)
+            movie.forEach((movie) => {
+                console.log(movie)
+                var movieList = document.querySelector(".content")
+                movieList.innerHTML = movieList.innerHTML + `
+                    <div class="movieTitle">Title: ${movie.title}</div>
+                    <div class="movieRating">Rating: ${movie.rating}/10</div>
+                    <div class="movieYear">Year: ${movie.year}</div>
+                    <div class="moviePlot">Plot: ${movie.plot}</div>
+                    <div class="movieGenre">Genre: ${movie.genre}</div>
+<hr>`
 
+            //     html = html + `<!--<div class = ".content">${movie.title}</div>-->`
+            })
+            // for (let i = 0; i < movie.length; i++) {
+            //     document.querySelector(".content").innerHTML =
+            //         (`
+            //     <div class="movieTitle">Title: ${movie[i].title}</div>
+            //     <div class="movieRating">Rating: ${movie[i].rating}/10</div>
+            //     `)
+            // }
+            console.log(movie)
+            // return html;
         });
 }
 
