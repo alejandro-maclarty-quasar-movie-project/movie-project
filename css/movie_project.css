@@ -4,7 +4,7 @@
     --white: #FFFFFF;
     --black: #000000;
 
-    --darkRed: #7D0633;
+    --darkred: #7D0633;
     --brown: #31112C;
     --peach: #F2A07B;
     --beige: #FBDCC4;
@@ -14,6 +14,32 @@
 * {
     /*border: 1px solid black;*/
 }
+.div-loading {
+
+}
+
+.div-loaded {
+
+}
+
+/*.loader {*/
+/*    border: 16px solid var(--beige);*/
+/*    border-top: 16px solid var(--brown);*/
+/*    border-bottom: 16px solid var(--brown);*/
+/*    border-radius: 20%;*/
+/*    width: 120px;*/
+/*    height: 120px;*/
+/*    animation: spin 4s linear infinite;*/
+/*}*/
+
+/*@keyframes spin {*/
+/*    0% {*/
+/*        transform: rotate(0deg);*/
+/*    }*/
+/*    100% {*/
+/*        transform: rotate(360deg);*/
+/*    }*/
+/*}*/
 
 body {
     background-color: var(--peach);
@@ -30,7 +56,7 @@ body {
 
 .textfield {
     background-color: var(--beige);
-    border: groove var(--brown);
+    border: solid 3px var(--brown);
     margin: 1.5px;
 }
 
