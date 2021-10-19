@@ -6,9 +6,9 @@ console.log("---------");
 // api
 const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 
-// function loading() {
-//     document.querySelector("body").innerHTML = (`<div class="loader">`);
-// }
+function loading() {
+    document.querySelector("body").innerHTML = (`<div class="loader">`);
+}
 
 
 // BEGIN LOADING... (WITH FETCH)
