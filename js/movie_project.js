@@ -6,28 +6,47 @@ console.log("---------");
 // api
 const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 
+
+
+// Without jQuery
+// Define a convenience method and use it
+var ready = (callback) => {
+    console.log("var ready test")
+  if (document.readyState != "loading") callback(loading());
+  else document.addEventListener("DOMContentLoaded", callback);
+}
+
+ready(() => {
+    console.log("ready function test")
+getMovies()
+});
+
 function loading() {
     document.querySelector("body").innerHTML = (`<div class="loader">`);
+    getMovies()
 }
 
 
 // BEGIN LOADING... (WITH FETCH)
 // BEGIN GET MOVIES
 function getMovies() {
+    // var body = document.querySelector(".loader");
+    // body.classList.remove("loader");
+    console.log("in getMovies under remove")
     return fetch(glitchURL)
         .then((response) => response.json())
+        .then()
+
         .then((movie) => {
             for (let i = 0; i < movie.length; i++) {
-                document.querySelector(".content").append
-                (`
+                document.querySelector(".content").innerHTML =
+                    (`
                 <div class="movieTitle">Title: ${movie[i].title}</div>
                 <div class="movieRating">Rating: ${movie[i].rating}/10</div>
                 `)
-
-
-
             }
-            console.log(movie)
+            // console.log(movie)
+
         });
 }
 
