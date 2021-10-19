@@ -12,13 +12,13 @@ const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 // Define a convenience method and use it
 var ready = (callback) => {
     console.log("var ready test")
-  if (document.readyState != "loading") callback(loading());
-  else document.addEventListener("DOMContentLoaded", callback);
+    if (document.readyState != "loading") callback(loading());
+    else document.addEventListener("DOMContentLoaded", callback);
 }
 
 ready(() => {
     console.log("ready function test")
-getMovies()
+    getMovies()
 });
 
 function loading() {
@@ -40,7 +40,7 @@ function getMovies() {
 
         .then((movie) => {
             movie.forEach((movie) => {
-                console.log(movie)
+                // console.log(movie)
                 var movieList = document.querySelector(".content")
                 movieList.innerHTML = movieList.innerHTML + `
                     <div class="movieTitle">Title: ${movie.title}</div>
@@ -48,21 +48,27 @@ function getMovies() {
                     <div class="movieYear">Year: ${movie.year}</div>
                     <div class="moviePlot">Plot: ${movie.plot}</div>
                     <div class="movieGenre">Genre: ${movie.genre}</div>
-<hr>`
-
-            //     html = html + `<!--<div class = ".content">${movie.title}</div>-->`
+                    <button type="submit" class="button" id="removeMovie">Remove Movie ID: ${movie.id}</button>
+                    <hr>`
             })
-            // for (let i = 0; i < movie.length; i++) {
-            //     document.querySelector(".content").innerHTML =
-            //         (`
-            //     <div class="movieTitle">Title: ${movie[i].title}</div>
-            //     <div class="movieRating">Rating: ${movie[i].rating}/10</div>
-            //     `)
-            // }
-            console.log(movie)
-            // return html;
+            // console.log(movie)
         });
 }
+
+// BEGIN REMOVE MOVIE BY ID
+document.querySelector("#removeMovie").addEventListener("click", function () {
+})
+
+function removeMovieById(id) {
+    let options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+    fetch(`${glitchURL}/${id}`, options)
+}
+// END REMOVE MOVIE BY ID
 
 // END GET MOVIES
 // END LOADING...
@@ -96,6 +102,8 @@ document.querySelector("#submitNewMovie").addEventListener("click", function (e)
 // END ADD MOVIE
 
 
+
+
 // BEGIN EDIT MOVIE
 function editMovie(movie) {
     let options = {
@@ -112,16 +120,4 @@ function editMovie(movie) {
 // END EDIT MOVIE
 
 
-// BEGIN REMOVE MOVIE BY ID
-function removeMovieById(id) {
-    let options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }
-    fetch(`${glitchURL}/${id}`, options)
-}
-
-// END REMOVE MOVIE BY ID
 
