@@ -8,46 +8,43 @@ const glitchURL = "https://spectacled-slender-reaper.glitch.me/movies"
 
 // new movie
 // let newMovie;
-let movieTitle = "";
-let movieRating = ""; // #/10
-let alteredMovie;
+// let movieTitle = "";
+// let movieRating = ""; // #/10
+// let editMovie;
 
-const loadingImage = (`<!--<img src="../img/loading-1.gif">-->`);
+// const loadingImage =
+const loadingImage = (`<img src="../img/loading-1.gif">`);
 
-
-// document.querySelector("#content").innerHTML = (`${loadingImage}`);
-
+function loading() {
+    document.querySelector("#content").innerHTML = (`${loadingImage}`);
+}
 
 // BEGIN LOADING... (WITH FETCH)
 // BEGIN GET MOVIES
 // var ready = (callback) => {
-//     if (document.readyState != "loading") callback();
+//     if (document.readyState != "loading") callback(loading);
 //     else document.addEventListener("DOMContentLoaded", callback);
 // }
+
 function getMovies() {
     return fetch(glitchURL)
         .then((response) => response.json())
-    //     .then((ready = (callback) => {
-    //     if (document.readyState != "loading") callback();
-    //     else document.addEventListener("DOMContentLoaded", callback);
-    // }))
-        // .then((ready(() => {
-    // })
-        .then((movies)=>{
-            console.log(movies);
-            for (let i = 0; i < movies.length; i++){
-                document.querySelector("#content").append(`<p>${movies[0].id}</p>`)
-                // console.log(movies)
+        .then((movie) => {
+            for (let i = 0; i < movie.length; i++) {
+                document.querySelector(".content").append(`
+                <div class="movieTitle">Title: ${movie[i].title}</div>
+                <div class="movieRating">Rating: ${movie[i].rating}/10</div>
+                `)
             }
+            console.log(movie)
         });
 }
-
 
 // END GET MOVIES
 // END LOADING...
 
 // getMovies().then((movies) => console.log(movies))
-var allMovies = getMovies().then((movies) => document.querySelector("#content").innerHTML = `${JSON.stringify(rendered)}`)
+// var allMovies = getMovies().then((movies) => document.querySelector("#content").innerHTML = `${JSON.stringify(rendered)}`)
 
 let rendered = function renderMovies(movies) {
     console.log(movies)
@@ -76,17 +73,12 @@ function addMovie(newMovie) {
 document.querySelector("#submitNewMovie").addEventListener("click", function (e) {
     e.preventDefault()
     console.log("hello")
-    let addMovieSub = document.querySelector("#newMovieName").value
-    let addMovieRateSub = document.querySelector("#newMovieRating").value
-    let newMovie = {name: addMovieSub, rating: addMovieRateSub};
+    let addMovieSubmit = document.querySelector("#newMovieName").value
+    let addMovieRateSubmit = document.querySelector("#newMovieRating").value
+    let newMovie = {title: addMovieSubmit, rating: addMovieRateSubmit};
     console.log(newMovie)
     addMovie(newMovie)
 })
-// Coffee Example
-// e.preventDefault();
-// var selection = roastSelection2.value;
-// var newCoffee = document.getElementById('Add-coffee').value;
-// newCoffee = newCoffee.charAt(0).toUpperCase() + newCoffee.slice(1).toLowerCase();
 
 // BEGIN EDIT MOVIE
 function editMovie(movie) {
@@ -100,7 +92,8 @@ function editMovie(movie) {
     return fetch(`${glitchURL}/${movie.id}`, options)
         .then((response) => response.json())
 }
-// alteredMovie =
+
+// editMovie =
 //     {
 //       "title": "resident evil",
 //       "rating": "5",
@@ -124,21 +117,19 @@ function editMovie(movie) {
 // movieRating,
 // // rating: 8
 // }
-
 // END ADD MOVIE
 // addMovie(newMovie).then((newMovie)=>console.log(newMovie));
 
 
 // BEGIN REMOVE MOVIE BY ID
-// function removeMovieById(id) {
-//     let options = {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     }
-//     fetch(`${glitchURL}/${id}`, options)
-// }
-
+function removeMovieById(id) {
+    let options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }
+    fetch(`${glitchURL}/${id}`, options)
+}
 // END REMOVE MOVIE BY ID
 

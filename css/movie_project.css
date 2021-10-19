@@ -1,22 +1,38 @@
-/* @import url('https://fonts.googleapis.com/'); */
-/* https://fonts.google.com/ */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 
 :root {
     --white: #FFFFFF;
-
-
     --black: #000000;
-}
-/*  */
-/* https://colorhunt.co */
-/* https://www.w3schools.com/colors/colors_picker.asp */
 
+    --darkRed: #7D0633;
+    --brown: #31112C;
+    --peach: #F2A07B;
+    --beige: #FBDCC4;
+}
 
 /* REMOVE: */
 * {
-    border: 1px solid seagreen;
+    /*border: 1px solid black;*/
 }
 
+body {
+    background-color: var(--peach);
+    color: var(--brown);
+    font-family: 'Comfortaa', cursive;
+}
+
+.button {
+    background-color: var(--brown);
+    color: var(--beige);
+    border: none;
+
+}
+
+.textfield {
+    background-color: var(--beige);
+    border: groove var(--brown);
+    margin: 1.5px;
+}
 
 /* extra small and down - phones */
 @media only screen and (max-width: 600px) {
